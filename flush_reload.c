@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <emmintrin.h>
 	
-#define CACHE_HIT_THRESHOLD 90
+#define CACHE_HIT_THRESHOLD 130
 #define MARGIN 1024
 
 int array[256*4096];

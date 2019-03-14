@@ -65,7 +65,7 @@ int main()
 {
 
 	// Registering Signal handler for SIGSEGV
-    signal(SIGSEGV, handle_segfault);
+/*    signal(SIGSEGV, handle_segfault);
 
     int fault_code = setjmp(restore_point);
     unsigned long kernel_addr = 0xfb61b000;
@@ -76,7 +76,12 @@ int main()
     }
     else
     	printf("Process Proceeds Normally\n");
+*/
 
+	// Cehcking flush reload
+	flush();
+	array[5*4096 + MARGIN] = 1;
+	reload();
     return 0;
 }
 
