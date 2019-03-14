@@ -7,7 +7,7 @@
 #include <fcntl.h>
 #include <stdint.h>
 #include <emmintrin.h>
-
+#include "rdtsc.h"
 #define CACHE_HIT_THRESHOLD 130
 #define MARGIN 1024
 
@@ -37,7 +37,7 @@ void flush()
   for (i=0; i<256; i++)
   _mm_clflush(&array[i*4096 + MARGIN]);
 }
-
+/*
 uint64_t rdtsc() {
   uint64_t a, d;
   asm volatile ("mfence");
@@ -46,7 +46,7 @@ uint64_t rdtsc() {
   asm volatile ("mfence");
   return a;
 }
-
+*/
 void reload()
 {
   int i;
