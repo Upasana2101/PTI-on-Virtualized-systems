@@ -1,7 +1,7 @@
 #include<stdio.h> 
 #include<signal.h> 
-#include <stdlib.h>
-#include <setjmp.h>
+#include<stdlib.h>
+#include<setjmp.h>
 #include<unistd.h>
 
 jmp_buf restore_point;
