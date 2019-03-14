@@ -93,6 +93,7 @@ int main()
   flush();
   // Retry 1000 times on the same address.
 
+  int fault_code = setjmp(restore_point);
   for (i = 0; i < 1000; i++) {
     ret = pread(fd, NULL, 0, 0); 
     if (ret < 0) {
@@ -100,7 +101,6 @@ int main()
       break;
     }
   
-  int fault_code = setjmp(restore_point);
   // Flush the probing array
   for (j = 0; j < 256; j++) 
     _mm_clflush(&array[j * 4096 + MARGIN]);
