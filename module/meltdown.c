@@ -20,7 +20,7 @@
 #include <linux/uaccess.h>
 
 static char secret = 'X';
-static char* buffer;
+static char* secret_buffer;
 
 MODULE_DESCRIPTION("Meltdown modules");
 
@@ -36,27 +36,28 @@ static int proc_open(struct inode *inode, struct file *file)
 static ssize_t proc_read(struct file *file_, char *buff, 
                          size_t length, loff_t *offset)
 {
-  
-    *buffer = secret;         
+   memcpy(secret_buffer, &secret, 1);              
    return 1;
 }
 
 static const struct file_operations proc_fops =
 {
-
+//    .owner = THIS_MODULE,
    .open = proc_open,
    .read = proc_read,
+//    .llseek = seq_lseek,
+//    .release = single_release,
 };
 
 static int __init meltdown_init(void)
 {
-    printk(KERN_INFO "Meltdown modue inserted!\n");
+    printk(KERN_INFO "Hello world!\n");
     printk("Secret address:%p\n", &secret);
     // remove_proc_entry("secret", NULL);
     
     proc_entry = proc_create_data("secret",0,NULL,&proc_fops,NULL);
-    buffer = (char*) kmalloc(sizeof(char),GFP_KERNEL);
-    if (buffer && proc_entry)
+    secret_buffer = (char*) kmalloc(sizeof(char),GFP_KERNEL);
+    if (secret_buffer && proc_entry)
         return 0;   
     return -ENOMEM;
 }
@@ -64,7 +65,7 @@ static int __init meltdown_init(void)
 static void __exit meltdown_cleanup(void)
 {
     printk(KERN_INFO "Cleaning up module.\n");
-    if(buffer) kfree(buffer);
+    if(secret_buffer) kfree(secret_buffer);
     remove_proc_entry("secret", NULL);
     
 
