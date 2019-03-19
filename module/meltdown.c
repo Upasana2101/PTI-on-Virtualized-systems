@@ -19,7 +19,7 @@
 #include <linux/seq_file.h>
 #include <linux/uaccess.h>
 
-static char secret = 'X';
+static char secret = 'M';
 static char* secret_buffer;
 
 MODULE_DESCRIPTION("Meltdown modules");
@@ -52,7 +52,7 @@ static const struct file_operations proc_fops =
 static int __init meltdown_init(void)
 {
     printk(KERN_INFO "Hello world!\n");
-    printk("Secret address:%p\n", &secret);
+    printk("Secret address:%lx\n", &secret);
     // remove_proc_entry("secret", NULL);
     
     proc_entry = proc_create_data("secret",0,NULL,&proc_fops,NULL);
