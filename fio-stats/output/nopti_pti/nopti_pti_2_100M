@@ -1,0 +1,40 @@
+file1: (g=0): rw=rw, bs=(R) 128KiB-128KiB, (W) 128KiB-128KiB, (T) 128KiB-128KiB, ioengine=libaio, iodepth=1
+fio-3.13-23-gc5da
+Starting 1 process
+
+file1: (groupid=0, jobs=1): err= 0: pid=1811: Sat Mar 23 01:27:31 2019
+  read: IOPS=8772, BW=1097MiB/s (1150MB/s)(48.2MiB/44msec)
+    slat (usec): min=7, max=426, avg=18.90, stdev=42.82
+    clat (nsec): min=685, max=287239, avg=1513.24, stdev=14582.59
+     lat (usec): min=8, max=432, avg=20.78, stdev=45.38
+    clat percentiles (nsec):
+     |  1.00th=[   692],  5.00th=[   708], 10.00th=[   708], 20.00th=[   716],
+     | 30.00th=[   724], 40.00th=[   724], 50.00th=[   732], 60.00th=[   732],
+     | 70.00th=[   740], 80.00th=[   748], 90.00th=[   812], 95.00th=[   908],
+     | 99.00th=[  1864], 99.50th=[  4128], 99.90th=[288768], 99.95th=[288768],
+     | 99.99th=[288768]
+  write: IOPS=9409, BW=1176MiB/s (1233MB/s)(51.8MiB/44msec); 0 zone resets
+    slat (usec): min=20, max=534, avg=36.74, stdev=41.08
+    clat (nsec): min=712, max=283833, avg=1468.14, stdev=13911.39
+     lat (usec): min=21, max=537, avg=38.59, stdev=43.55
+    clat percentiles (nsec):
+     |  1.00th=[   732],  5.00th=[   748], 10.00th=[   748], 20.00th=[   756],
+     | 30.00th=[   756], 40.00th=[   764], 50.00th=[   764], 60.00th=[   772],
+     | 70.00th=[   772], 80.00th=[   780], 90.00th=[   804], 95.00th=[   868],
+     | 99.00th=[  1208], 99.50th=[  1640], 99.90th=[284672], 99.95th=[284672],
+     | 99.99th=[284672]
+  lat (nsec)   : 750=45.12%, 1000=51.62%
+  lat (usec)   : 2=2.75%, 4=0.12%, 10=0.12%, 500=0.25%
+  cpu          : usr=0.00%, sys=83.72%, ctx=24, majf=0, minf=12
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=386,414,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=1097MiB/s (1150MB/s), 1097MiB/s-1097MiB/s (1150MB/s-1150MB/s), io=48.2MiB (50.6MB), run=44-44msec
+  WRITE: bw=1176MiB/s (1233MB/s), 1176MiB/s-1176MiB/s (1233MB/s-1233MB/s), io=51.8MiB (54.3MB), run=44-44msec
+
+Disk stats (read/write):
+  vda: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
